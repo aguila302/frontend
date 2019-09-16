@@ -15,17 +15,19 @@ module.exports = {
         }),
 
         new MiniCssExtractPlugin({
-            filename: 'output.css'
+            filename: 'output.css',
+            chunkFilename: 'output.css'
         })
     ],
 
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [{
-                    loader: MiniCssExtractPlugin.loader,
-                }, 'css-loader'
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    { loader: MiniCssExtractPlugin.loader, },
+                    { loader: 'css-loader', options: { importLoaders: 2 }, },
+                    { loader: 'postcss-loader', }
                 ]
             }
         ]
